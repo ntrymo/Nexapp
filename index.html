@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nexapp</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#707070;
+color:white;
+}
+
+/* splash */
+
+.splash{
+position:fixed;
+width:100%;
+height:100%;
+background:#707070;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:2000;
+font-size:22px;
+}
+
+/* success */
+
+.success{
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+background:#a3d620;
+color:black;
+padding:15px;
+border-radius:10px;
+display:none;
+z-index:2000;
+}
+
+/* header */
+
+.header{
+background:#707070;
+padding:15px;
+text-align:center;
+position:fixed;
+width:100%;
+top:0;
+font-weight:bold;
+}
+
+.menu{
+position:absolute;
+right:15px;
+top:15px;
+cursor:pointer;
+}
+
+.menu div{
+width:25px;
+height:3px;
+background:#a3d620;
+margin:5px;
+}
+
+/* sidebar */
+
+.sidebar{
+position:fixed;
+left:-260px;
+top:0;
+width:260px;
+height:100%;
+background:#555;
+padding-top:80px;
+transition:.3s;
+}
+
+.sidebar.active{
+left:0;
+}
+
+.sidebar div{
+padding:15px;
+border-bottom:1px solid #777;
+cursor:pointer;
+}
+
+.sidebar i{
+margin-left:10px;
+color:#a3d620;
+}
+
+/* page */
+
+.page{
+display:none;
+padding:90px 20px;
+}
+
+.active{
+display:block;
+}
+
+.card{
+background:#888;
+padding:20px;
+margin:15px 0;
+border-radius:15px;
+}
+
+button{
+background:#a3d620;
+border:none;
+padding:15px;
+width:100%;
+margin-top:10px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.home-btn{
+background:#444;
+}
+
+input,textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="splash" id="splash">
+<i class="fa-solid fa-rocket"></i>
+Nexapp
+</div>
+
+<div class="success" id="success">
+✔️ تم ارسال الطلب
+</div>
+
+<div class="header">
+
+<div class="menu" onclick="toggleMenu()">
+<div></div>
+<div></div>
+<div></div>
+</div>
+
+<i class="fa-solid fa-code"></i>
+
+Nexapp
+
+</div>
+
+<div class="sidebar" id="sidebar">
+
+<div onclick="showPage('home')">
+<i class="fa fa-home"></i> الرئيسية
+</div>
+
+<div onclick="showPage('app')">
+<i class="fa fa-mobile"></i> إنشاء تطبيق
+</div>
+
+<div onclick="showPage('site')">
+<i class="fa fa-globe"></i> إنشاء موقع
+</div>
+
+<div onclick="showPage('services')">
+<i class="fa fa-cogs"></i> الخدمات
+</div>
+
+<div onclick="showPage('price')">
+<i class="fa fa-money-bill"></i> الأسعار
+</div>
+
+<div onclick="showPage('contact')">
+<i class="fa fa-phone"></i> تواصل
+</div>
+
+<div onclick="showPage('privacy')">
+<i class="fa fa-shield"></i> الخصوصية
+</div>
+
+<div onclick="showPage('terms')">
+<i class="fa fa-file"></i> الشروط
+</div>
+
+</div>
+
+<!-- الرئيسية -->
+
+<div id="home" class="page active">
+
+<div class="card">
+
+<button onclick="showPage('app')">
+<i class="fa fa-mobile"></i>
+إنشاء تطبيق
+</button>
+
+<button onclick="showPage('site')">
+<i class="fa fa-globe"></i>
+إنشاء موقع
+</button>
+
+</div>
+
+</div>
+
+<!-- إنشاء تطبيق -->
+
+<div id="app" class="page">
+
+<button class="home-btn" onclick="showPage('home')">
+ الرجوع للرئيسية
+</button>
+
+<h2><i class="fa fa-mobile"></i> إنشاء تطبيق</h2>
+
+<div class="card">
+
+<input id="appName" placeholder="اسمك">
+<input id="appPhone" placeholder="الهاتف">
+<input id="appEmail" placeholder="البريد">
+<textarea id="appDesc" placeholder="الوصف"></textarea>
+
+<button onclick="sendApp()">
+<i class="fa fa-paper-plane"></i>
+إرسال
+</button>
+
+</div>
+
+</div>
+
+<!-- إنشاء موقع -->
+
+<div id="site" class="page">
+
+<button class="home-btn" onclick="showPage('home')">
+ الرجوع للرئيسية
+</button>
+
+<h2><i class="fa fa-globe"></i> إنشاء موقع</h2>
+
+<div class="card">
+
+<input id="siteName" placeholder="اسمك">
+<input id="sitePhone" placeholder="الهاتف">
+<input id="siteEmail" placeholder="البريد">
+<textarea id="siteDesc" placeholder="الوصف"></textarea>
+
+<button onclick="sendSite()">
+<i class="fa fa-paper-plane"></i>
+إرسال
+</button>
+
+</div>
+
+</div>
+
+<!-- الخدمات -->
+
+<div id="services" class="page">
+
+<button class="home-btn" onclick="showPage('home')">
+الرجوع للرئيسية
+</button>
+
+<div class="card">
+<i class="fa fa-mobile"></i>
+تصميم تطبيقات
+</div>
+
+<div class="card">
+<i class="fa fa-globe"></i>
+تصميم مواقع
+</div>
+
+<div class="card">
+<i class="fa fa-code"></i>
+برمجة احترافية
+</div>
+
+</div>
+
+<!-- الأسعار -->
+
+<div id="price" class="page">
+
+<button class="home-btn" onclick="showPage('home')">
+ الرجوع للرئيسية
+</button>
+
+<div class="card">📱 تطبيق — 138</div>
+<div class="card">🌐 موقع — 100$</div>
+
+</div>
+
+<!-- تواصل -->
+
+<div id="contact" class="page">
+
+<button class="home-btn" onclick="showPage('home')">
+ الرجوع للرئيسية
+</button>
+
+<div class="card">
+<i class="fa-brands fa-whatsapp"></i>
+0704973576
+</div>
+
+<div class="card">
+<i class="fa-brands fa-instagram"></i>
+f.lm95
+</div>
+
+<div class="card">
+<i class="fa-brands fa-youtube"></i>
+totworker
+</div>
+
+<div class="card">
+<i class="fa-brands fa-discord"></i>
+ssmoha
+</div>
+
+</div>
+
+<div id="privacy" class="page">
+<button class="home-btn" onclick="showPage('home')"> الرئيسية</button>
+نحترم خصوصيتك
+</div>
+
+<div id="terms" class="page">
+<button class="home-btn" onclick="showPage('home')"> الرئيسية</button>
+باستخدام التطبيق توافق على الشروط
+</div>
+
+<script>
+
+setTimeout(()=>{
+document.getElementById("splash").style.display="none"
+},2000)
+
+function toggleMenu(){
+document.getElementById("sidebar").classList.toggle("active")
+}
+
+function showPage(p){
+
+document.querySelectorAll(".page")
+.forEach(e=>e.classList.remove("active"))
+
+document.getElementById(p).classList.add("active")
+
+document.getElementById("sidebar").classList.remove("active")
+
+}
+
+const webhook="https://discord.com/api/webhooks/1494819085891141725/2dGHQzFGsFqXVzDiy4issdeoh4vCTRjSY1CjYWW2anJQ-3HRGosxseKnzzfAwSc5hrgY"
+
+function success(){
+
+let s=document.getElementById("success")
+s.style.display="block"
+setTimeout(()=>s.style.display="none",3000)
+
+}
+
+function sendApp(){
+
+fetch(webhook,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+content:
+"📱 طلب تطبيق\n"+
+appName.value+"\n"+
+appPhone.value+"\n"+
+appEmail.value+"\n"+
+appDesc.value
+})
+})
+
+success()
+
+}
+
+function sendSite(){
+
+fetch(webhook,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+content:
+"🌐 طلب موقع\n"+
+siteName.value+"\n"+
+sitePhone.value+"\n"+
+siteEmail.value+"\n"+
+siteDesc.value
+})
+})
+
+success()
+
+}
+
+</script>
+
+</body>
+</html>
